@@ -111,22 +111,19 @@ body {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    padding: 30px;
     justify-content: space-evenly;
-
 
 }
 
 .blog-list-item {
     border: 1px solid rgb(189, 189, 189);
-    border-radius: 10px;
-    width: 400px;
-    height: 30%;
+    border-radius: 15px;
+    margin-bottom: 50px;
+    width: 320px;
     background-color: whitesmoke;
-    box-shadow: 0px 9px 20px grey;
-    margin: 25px;
-    padding: 20px;
-
+    box-shadow: 0px 0px 20px grey;
+    margin-left: 20px;
+    padding-bottom: 15px;
 
 }
 
@@ -135,6 +132,7 @@ body {
     border: 1px whitesmoke;
     border-radius: 5px;
     text-align: center;
+
 }
 
 a {

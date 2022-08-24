@@ -11,6 +11,7 @@ const db = require('./connection/db')
 
 
 app.get("/", function (request, response) {
+
     db.connect(function (err, client, done) {
         if (err) throw err // menampilkan error koneksi database
 
@@ -20,37 +21,31 @@ app.get("/", function (request, response) {
             console.log(result.rows)
             let data = result.rows
 
-            let dataBlog = data.map(function (item) {
+            let blog = data.map(function (item) {
                 return {
                     ...item,
-
-                    duration: getDistanceTime(new Date(item.start_date), new Date(item.end_date)),
-
-
+                    duration: getDistanceTime(new Date(item.start_date), new Date(item.end_date))
 
                 }
             })
 
-            response.render('index', { dataBlog })
+            response.render('index', { dataBlog: blog })
         })
 
     })
 });
-
 app.get('/blog-detail/:index', function (request, response) {
     let index = request.params.index
     response.render('blog-detail')
 });
-
 app.get('/contact', function (request, response) {
     response.render('contact')
 })
 app.get("/myproject", function (request, response) {
     response.render("myproject");
 });
-
 app.post('/myproject', function (request, response) {
-
+    response.redirect("/");
 });
 app.get("/update-blog", function (request, response) {
 
@@ -104,18 +99,17 @@ function getDistanceTime(time, end) {
     let distanceSeconds = Math.floor(distance / milisecond);
 
     if (distanceMonth > 0) {
-        return `${distanceMonth} months ago`;
+        return `${distanceMonth} bulan `;
     } else if (distanceDay > 0) {
-        return `${distanceDay} days ago`;
+        return `${distanceDay} hari `;
     } else if (distanceHours > 0) {
-        return `${distanceHours} hours ago`;
+        return `${distanceHours} jam `;
     } else if (distanceMinutes > 0) {
-        return `${distanceMinutes} minutes ago`;
+        return `${distanceMinutes} menit`;
     } else {
-        return `${distanceSeconds} seconds ago`;
+        return `${distanceSeconds} detik`;
     }
 }
-
 
 app.listen(port, function () {
     console.log(`server running on port ${port}`);
